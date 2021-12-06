@@ -2,29 +2,33 @@ const { gql } = require('apollo-server');
 
 const prendaInventarioTypes = gql `
     type PrendaInventario {
-        id         :String!
-        tipoPrenda :String!
+        id         :Int!
+        tipo_Prenda :String!
         descripcion:String!
         talla      :String!
         cantidad   :Int!
     }
     type DetallePrenda{
-        tipoPrenda :String!
+        id         :Int!
+        tipo_prenda :String!
         descripcion:String!
         talla      :String!
         cantidad   :Int!
     }
     input ActualizarPrenda{
-        talla      :String!
-        cantidad   :Int!
+        id          :Int!
+        tipo_prenda :String!
+        descripcion :String!
+        talla       :String!
+        cantidad    :Int!
     }
     type Query{
         detallePrendaInventarioPorId(prendaId:Int!):DetallePrenda!
     }
 
     type Mutation{
-        actualizacionPrendaInventario(prenda:ActualizarPrenda!):DetallePrenda!
-        eliminarPrendaInventario(prendaId:String!):String!
+        actualizacionPrendaInventario(prendaInventarioId:ActualizarPrenda!):DetallePrenda!
+        eliminarPrendaInventario(prendaId:Int!):String!
     }
     
 `;

@@ -18,13 +18,17 @@ const pedidoTypes = gql `
         nombrePrenda:String!
         talla       :String!
     }
+
+    type PedidoBorrado {
+        status : String!
+    }
     
     extend type Query{
         pedidoPorUsername(username:String!):[Pedido] 
     }
     extend type Mutation{
         crearPedido(pedido:PedidoIngreso!):Pedido
-        borrarPedido(username:String!):String!
+        borrarPedido(pedidoId:String!):PedidoBorrado!
     }
 `;
 module.exports = pedidoTypes;

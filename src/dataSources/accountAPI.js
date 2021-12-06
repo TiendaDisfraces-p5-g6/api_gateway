@@ -17,14 +17,15 @@ class AccountAPI extends RESTDataSource {
         return await this.get(`/getPedidos/${username}`);
     }
     async borrarPedido(pedidoId){
+        console.log("SADSD " +pedidoId)
         return await this.delete(`/delPedido/${pedidoId}`);
     }
     async crearPrenda(prenda){
         prenda = new Object(JSON.parse(JSON.stringify(prenda)));
         return await this.post('/setPrendas', prenda)
     }
-    async obtenerPrenda(prenda){
-        return await this.get('/getPrendas', prenda);
+    async obtenerPrenda(tipoPrenda){
+        return await this.get(`/getPrendas`,tipoPrenda );
     }
 
 }

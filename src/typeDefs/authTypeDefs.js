@@ -16,11 +16,12 @@ const authTypes = gql `
         password:String!
     }
     input RegistroIngreso {
-        username:String!
-        password:String!
-        name    :String!
-        phone   :Int!
-        email   :String!
+        username         :String!
+        password         :String!
+        name             :String!
+        phone            :Int!
+        email            :String!
+        prendasAlquiladas:Int!
     }
     type DetalleUsuario{
         id      :Int!

@@ -2,6 +2,8 @@ const pedidosResolver = {
     Query: {
         pedidoPorUsername: async(_, { username }, { dataSources, usuarioIdToken}) => {
             usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
+            console.log(username)
+            console.log(usernameToken)
             if(username == usernameToken) 
                 return await dataSources.accountAPI.obtenerPedidoPorUsername(username);
             else
@@ -16,8 +18,19 @@ const pedidosResolver = {
             else
                 return null;
         },
-        borrarPedido: async(_, { username }, { dataSources, usuarioIdToken }) => {
-            usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
+        borrarPedido: async(_, {pedidoId }, { dataSources, usuarioIdToken }) => {
+            console.log("SDFADSF " + pedidoId)
+            //usernameToken= (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
+            let resultado = await dataSources.accountAPI.borrarPedido(pedidoId); 
+            console.log("Resultado " + resultado);
+
+            if ( "pedido eliminado con exito" === resultado) {
+                return { "status": "ok" } 
+            } else {
+                return { "status": "fail" } 
+            }
+           
+                
         }
     }
 };

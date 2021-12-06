@@ -1,6 +1,8 @@
 const usuarioResolver = {
     Query: {
         detalleUsuarioPorId: async(_, {usuarioId}, { dataSources, usuarioIdToken }) => {
+            console.log(usuarioId)
+            console.log(usuarioIdToken)
             if(usuarioId == usuarioIdToken)
                 return await dataSources.authAPI.obtenerUsuario(usuarioId);
             else
@@ -9,22 +11,18 @@ const usuarioResolver = {
     },
     Mutation: {
         registroUsuario: async (_, {entradaUsuario}, { dataSources }) => {
-            const cuentaIngreso = {
-                username          : entradaUsuario.username,
-                prendasAlquiladas : entradaUsuario.prendasAlquiladas,
-                ultimoAlquiler    : (new Date()).toISOString()
-            }
 
             const usuarioIngreso = {
                 username : entradaUsuario.username,
                 password : entradaUsuario.password,
                 name     : entradaUsuario.name,
                 phone    : entradaUsuario.phone,
-                email    : entradaUsuario.email 
+                email    : entradaUsuario.email,
+                account  :{
+                    prendasAlquiladas: entradaUsuario.prendasAlquiladas  
+                } 
             }
             const userResponse = await dataSources.authAPI.crearUsuario(usuarioIngreso);
-            if(userResponse.hasOwnProperty('refresh') && userResponse.hasOwnProperty('access'))
-                await dataSources.authAPI.creacionCuenta(cuentaIngreso);
             return userResponse;
         },
 
@@ -34,9 +32,9 @@ const usuarioResolver = {
         refreshToken: async(_, { token }, { dataSources }) => {
             return await dataSources.authAPI.refreshToken(token);
         },
-        actualizacionUsuario:async(_, { usuario}, { dataSources, usuarioIdToken }) => {
+        actualizacionUsuario:async(_, { usuarioId}, { dataSources, usuarioIdToken }) => {
             if(usuario.id == usuarioIdToken)
-                return await dataSources.authAPI.actualizarUsuario(usuario);
+                return await dataSources.authAPI.actualizarUsuario(usuarioId);
             else
                 return null;
         },

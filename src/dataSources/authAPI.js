@@ -29,20 +29,17 @@ class AuthAPI extends RESTDataSource {
         token = new Object( token );
         return await this.post('/refresh/', token);
     }
-    async creacionCuenta(cuenta){
-        cuenta = new Object(JSON.parse(JSON.stringify(cuenta)));
-        return await this.post('/cuenta', cuenta);
-    }
     async cuentaPorId(cuentaId){
         return await this.get(`/cuenta/${cuentaId}/`);
     }
-    async obtenerPrendaInventario(prendaInventario){
-        return await this.get(`/prendaInventarioList/`, prendaInventario);
+    async obtenerPrendaInventario(prendaId){
+        return await this.get(`/prendaInventarioList/${prendaId}/`);
     }
     async actualizarPrendaInventario(prendaInventario){
-        prendaInventarioId = new Object(JSON.parse(JSON.stringify(prendaInventario)));
+        prendaInventario = new Object(JSON.parse(JSON.stringify(prendaInventario)));
         let prendaInventarioId = prendaInventario.id;
         return await this.put(`/prendaInventarioActualizar/${prendaInventarioId}/`, prendaInventario);
+        
     }
     async eliminarPrendaInventario(prendaInventarioId){
         return await this.delete(`/prendaInventarioBorrar/${prendaInventarioId}/`);

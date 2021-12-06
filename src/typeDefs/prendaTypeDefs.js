@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const prendaTypes = gql `
     type Prenda {
         id          :String!
-        vendedor    :String
+        username    :String!
         nombre      :String!
         tipoPrenda  :String!
         descripcion :String!
@@ -12,6 +12,7 @@ const prendaTypes = gql `
         img         :String
     }
     input PrendaIngreso {
+        username    :String!
         nombre      :String!
         tipoPrenda  :String!
         descripcion :String!
@@ -19,6 +20,7 @@ const prendaTypes = gql `
         precio      :Int!
     }
     type DetallePrenda{
+        username    :String!
         nombre      :String!
         tipoPrenda  :String!
         descripcion :String!
@@ -26,8 +28,8 @@ const prendaTypes = gql `
         precio      :Int!
     }
     
-    type Query{
-        detallePrendaPorNombre(prenda:String!):DetallePrenda!
+    extend type Query{
+        detallePrenda(tipoPrenda:String):[Prenda]
     }
     extend type Mutation{
         crearPrenda(prenda:PrendaIngreso!):Prenda

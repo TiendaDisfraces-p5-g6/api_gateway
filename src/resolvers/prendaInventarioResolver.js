@@ -1,17 +1,17 @@
 const prendaInventarioResolver = {
     Query: {
         detallePrendaInventarioPorId: async(_, { prendaId }, { dataSources} ) => {
-            await dataSources.authAPI.obtenerPrendaInventario( prendaId)
+            return await dataSources.authAPI.obtenerPrendaInventario( prendaId)
             
          }
     },   
     Mutation: {
-        actualizacionPrendaInventario: async(_, { prenda }, { dataSources }) => {
-            await dataSources.authAPI.actualizarPrendaInventario(prenda)
+        actualizacionPrendaInventario: async(_, { prendaInventarioId }, { dataSources }) => {
+            return await dataSources.authAPI.actualizarPrendaInventario(prendaInventarioId)
 
         },
         eliminarPrendaInventario: async(_, { prendaId}, { dataSources }) => {
-            await dataSources.authAPI.eliminarPrendaInventario(prendaId)
+            return await dataSources.authAPI.eliminarPrendaInventario(prendaId)
         }
     }
 };

@@ -2,13 +2,21 @@ const { gql } = require('apollo-server')
 
 const accountTypes = gql `
     type Cuenta{
-        id: Int!
-        username:String!
+        id: Int
+        username:String
         prendasAlquiladas:Int!
-        ultimoAlquiler:String!
+        fechaUltimoAlquiler:String
     }
+    input CreacionCuenta{
+        prendasAlquiladas:Int!
+    }
+
     extend type Query{
-        cuentaPorUsername(username:String!):Cuenta
+        cuentaPorId(id:Int!):Cuenta
+    }
+       
+    type Mutation{
+        registroPrendasAlquiladas(prendasAlquiladas:Int!):Cuenta
     }
 `;
 module.exports = accountTypes;

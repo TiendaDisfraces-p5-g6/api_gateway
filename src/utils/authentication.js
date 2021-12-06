@@ -6,7 +6,7 @@ const authentication = async( {req} ) => {
     const token = req.headers.authorization || '';
 
     if(token == '') {
-        return { userIdToken : null }
+        return { usuarioIdToken : null }
     }
     else {
         try {
@@ -18,21 +18,23 @@ const authentication = async( {req} ) => {
             };
 
             let response = await fetch(
-                `${serverConfig.auth_api_url}/verifyToken/`,
+                `${serverConfig.auth_api_url}verifyToken/`,
                 requestOptions
             ) 
-
+            
             if(response.status != 200) {
                 console.log(response);
                 throw new ApolloError(`Sesión fallida o inactiva - ${401}` + response.status, 401);
             }
 
-            return { userIdToken: (await response.json()).UserId };
+            return { usuarioIdToken: (await response.json()).UserId};
+           
         }
         catch(error) {
             throw new ApolloError(`Error validando el token: ${500}: ${error}`, 500);
         }
     }
+
 }
 
 module.exports = authentication;

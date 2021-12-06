@@ -1,9 +1,9 @@
 const accountResolver = {
     Query: {
-        cuentaPorUsername: async(_, {username}, { dataSources, usuarioIdToken }) => {
-            usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
-            if(username == usernameToken)
-                return await dataSources.authAPI.cuentaPorId(username);
+        cuentaPorId: async(_, {id}, { dataSources, usuarioIdToken }) => {
+            idToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).id
+            if(id == idToken)
+                return await dataSources.authAPI.cuentaPorId(id);
             else
                 return null;
         }
