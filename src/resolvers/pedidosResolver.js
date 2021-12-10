@@ -1,13 +1,11 @@
 const pedidosResolver = {
     Query: {
         pedidoPorUsername: async(_, { username }, { dataSources, usuarioIdToken}) => {
-            usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
-            console.log(username)
-            console.log(usernameToken)
-            if(username == usernameToken) 
+            //usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
+            //if(username == usernameToken) 
                 return await dataSources.accountAPI.obtenerPedidoPorUsername(username);
-            else
-                return null;
+            //else
+              //  return null;
         }
     },
     Mutation: {
@@ -19,10 +17,10 @@ const pedidosResolver = {
                 return null;
         },
         borrarPedido: async(_, {pedidoId }, { dataSources, usuarioIdToken }) => {
-            console.log("SDFADSF " + pedidoId)
+            
             //usernameToken= (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
             let resultado = await dataSources.accountAPI.borrarPedido(pedidoId); 
-            console.log("Resultado " + resultado);
+            
 
             if ( "pedido eliminado con exito" === resultado) {
                 return { "status": "ok" } 
