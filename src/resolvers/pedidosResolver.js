@@ -1,11 +1,11 @@
 const pedidosResolver = {
     Query: {
         pedidoPorUsername: async(_, { username }, { dataSources, usuarioIdToken}) => {
-            //usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
-            //if(username == usernameToken) 
+            usernameToken = (await dataSources.authAPI.obtenerUsuario(usuarioIdToken)).username
+            if(username == usernameToken) 
                 return await dataSources.accountAPI.obtenerPedidoPorUsername(username);
-            //else
-              //  return null;
+            else
+                return null;
         }
     },
     Mutation: {
